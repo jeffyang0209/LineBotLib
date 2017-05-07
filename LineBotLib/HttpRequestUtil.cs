@@ -63,7 +63,7 @@ namespace MakerAPI.Util.Line
         }
 
         /// <summary>
-        /// 取得使用者資料
+        /// 取得使用者資料!
         /// </summary>
         /// <param name="userID">userID</param>
         /// <returns>string</returns>
