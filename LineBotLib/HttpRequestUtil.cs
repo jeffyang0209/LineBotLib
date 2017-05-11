@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace MakerAPI.Util.Line
+namespace LineBotLib
 {
     public class HttpRequestUtil
     {
@@ -118,7 +118,7 @@ namespace MakerAPI.Util.Line
         /// </summary>
         /// <param name="jsonMessage">json字串</param>
         /// <returns>bool</returns>
-        private bool Multicast(string jsonMessage)
+        public bool Multicast(string jsonMessage)
         {
             return Line("multicast", jsonMessage);
         }
@@ -131,15 +131,22 @@ namespace MakerAPI.Util.Line
         /// </summary>
         /// <param name="to">多筆ID</param>
         /// <param name="messages">發送的訊息</param>
-        public void MulticastText(List<string> to, string[] messages)
+        public void MulticastTemplate(List<string> liTo, string text, string altText, List<LineBotMessage.Action> liAction, string thumbnailImageUrl = null, string title = null)
         {
-            List<LineBotMessage.LineBotMessage.Message> liMessage = new List<LineBotMessage.LineBotMessage.Message>();
+            List<LineBotMessage.Message> liMessage = new List<LineBotMessage.Message>();
 
-            foreach (string str in messages)
-                liMessage.Add(new LineBotMessage.LineBotMessage.Text(str));
+            LineBotMessage.Column column = new LineBotMessage.Column(
+                thumbnailImageUrl,
+                title,
+                text,
+                liAction);
 
-            LineBotMessage.LineBotMessage.Multicast multicast = new LineBotMessage.LineBotMessage.Multicast(liMessage, to);
-            Push(JsonConvert.SerializeObject(multicast, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
+            LineBotMessage.ButtonTemplate templateType = new LineBotMessage.Buttons(column);
+            LineBotMessage.Template template = new LineBotMessage.Template(altText, templateType);
+            liMessage.Add(template);
+
+            LineBotMessage.Multicast multicast = new LineBotMessage.Multicast(liMessage, liTo);
+            Multicast(JsonConvert.SerializeObject(multicast, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
         }
 
         #endregion
@@ -157,9 +164,9 @@ namespace MakerAPI.Util.Line
         /// <param name="message">發送的訊息</param>
         public void PushText(string to, string message)
         {
-            List<LineBotMessage.LineBotMessage.Message> liMessage = new List<LineBotMessage.LineBotMessage.Message>();
-            liMessage.Add(new LineBotMessage.LineBotMessage.Text(message));
-            LineBotMessage.LineBotMessage push = new LineBotMessage.LineBotMessage.Push(liMessage, to);
+            List<LineBotMessage.Message> liMessage = new List<LineBotMessage.Message>();
+            liMessage.Add(new LineBotMessage.Text(message));
+            LineBotMessage push = new LineBotMessage.Push(liMessage, to);
 
             Push(JsonConvert.SerializeObject(push, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
         }
@@ -172,9 +179,9 @@ namespace MakerAPI.Util.Line
         /// <param name="message">發送的訊息</param>
         public void ReplyText(string to, string message)
         {
-            List<LineBotMessage.LineBotMessage.Message> liMessage = new List<LineBotMessage.LineBotMessage.Message>();
-            liMessage.Add(new LineBotMessage.LineBotMessage.Text(message));
-            LineBotMessage.LineBotMessage push = new LineBotMessage.LineBotMessage.Push(liMessage, to);
+            List<LineBotMessage.Message> liMessage = new List<LineBotMessage.Message>();
+            liMessage.Add(new LineBotMessage.Text(message));
+            LineBotMessage push = new LineBotMessage.Push(liMessage, to);
 
             Reply(JsonConvert.SerializeObject(push, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }));
         }
