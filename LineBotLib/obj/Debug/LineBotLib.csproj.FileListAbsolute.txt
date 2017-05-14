@@ -4,3 +4,9 @@
 \\mac\home\documents\visual studio 2017\Projects\LineBotLib\LineBotLib\bin\Debug\Newtonsoft.Json.xml
 \\mac\home\documents\visual studio 2017\Projects\LineBotLib\LineBotLib\obj\Debug\LineBotLib.dll
 \\mac\home\documents\visual studio 2017\Projects\LineBotLib\LineBotLib\obj\Debug\LineBotLib.pdb
+C:\Users\Jeff\Documents\LineBotLib\LineBotLib\bin\Debug\LineBotLib.dll
+C:\Users\Jeff\Documents\LineBotLib\LineBotLib\bin\Debug\LineBotLib.pdb
+C:\Users\Jeff\Documents\LineBotLib\LineBotLib\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Jeff\Documents\LineBotLib\LineBotLib\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Jeff\Documents\LineBotLib\LineBotLib\obj\Debug\LineBotLib.dll
+C:\Users\Jeff\Documents\LineBotLib\LineBotLib\obj\Debug\LineBotLib.pdb

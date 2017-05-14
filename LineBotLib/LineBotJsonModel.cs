@@ -50,6 +50,12 @@ namespace LineBotLib
                 /// </summary>
                 [JsonProperty(PropertyName = "message")]
                 public MessageRootObject Message { get; set; }
+
+                /// <summary>
+                /// postback打回來的資料
+                /// </summary>
+                [JsonProperty(PropertyName = "postback")]
+                public Postback Postback { get; set; }
             }
 
 
@@ -84,6 +90,11 @@ namespace LineBotLib
             }
 
             #endregion
+
+            public class Postback
+            {
+                public string data { get; set; }
+            }
 
             #region MessageRootObject
 
